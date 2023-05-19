@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Retrospective {
@@ -22,6 +23,15 @@ public class Retrospective {
 
     @Enumerated(EnumType.STRING)
     private RetrospectiveStatus status = RetrospectiveStatus.DEFAULT;
+
+    @OneToMany
+    private List<Category> categories;
+
+    @OneToMany
+    private List<Team> teams;
+
+    @ManyToMany
+    private List<User> users;
 
     public Retrospective() {
     }
