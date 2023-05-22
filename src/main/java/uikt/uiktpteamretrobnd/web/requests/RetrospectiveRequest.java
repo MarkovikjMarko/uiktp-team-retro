@@ -1,49 +1,23 @@
-package uikt.uiktpteamretrobnd.model;
+package uikt.uiktpteamretrobnd.web.requests;
 
-import jakarta.persistence.*;
 import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
 
 import java.time.LocalDate;
-import java.util.List;
 
-@Entity
-public class Retrospective {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
+public class RetrospectiveRequest {
     private String title;
 
     private LocalDate date;
 
     private String sprintName;
 
-    @Enumerated(EnumType.STRING)
-    private RetrospectiveStatus status = RetrospectiveStatus.DEFAULT;
+    private RetrospectiveStatus status;
 
-    @OneToMany
-    private List<Category> categories;
-
-    @OneToMany
-    private List<Team> teams;
-
-    @ManyToMany
-    private List<User> users;
-
-    public Retrospective() {
-    }
-
-    public Retrospective(String title, LocalDate date, String sprintName, RetrospectiveStatus status) {
+    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status) {
         this.title = title;
         this.date = date;
         this.sprintName = sprintName;
-        this.status = status == null ? RetrospectiveStatus.DEFAULT : status;
-    }
-
-    public Long getId() {
-        return id;
+        this.status = status;
     }
 
     public String getTitle() {

@@ -2,9 +2,13 @@ package uikt.uiktpteamretrobnd.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
 import uikt.uiktpteamretrobnd.model.Retrospective;
+import uikt.uiktpteamretrobnd.model.exceptions.ModelNotFoundException;
 import uikt.uiktpteamretrobnd.repository.RetrospectiveRepository;
+import uikt.uiktpteamretrobnd.web.requests.RetrospectiveRequest;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,18 +29,46 @@ public class RetrospectiveService {
         return retrospectiveRepository.findById(id);
     }
 
-    public Retrospective create(Retrospective retrospective) {
-        return retrospectiveRepository.save(retrospective);
+    public Retrospective create(RetrospectiveRequest retrospectiveRequest) {
+        String title = retrospectiveRequest.getTitle();
+        LocalDate date = retrospectiveRequest.getDate();
+        String sprintName = retrospectiveRequest.getSprintName();
+        RetrospectiveStatus status = retrospectiveRequest.getStatus();
+
+        Retrospective retrospective = new Retrospective(title, date, sprintName, status);
+
+        retrospectiveRepository.save(retrospective);
+
+        return retrospective;
     }
 
-    public Optional<Retrospective> update(Long id, Retrospective retrospective) {
-        Optional<Retrospective> existingRetrospective = retrospectiveRepository.findById(id);
+    public Retrospective update(Long id, RetrospectiveRequest retrospectiveRequest) {
+        Retrospective retrospective = this.retrospectiveRepository.findById(id).orElseThrow(ModelNotFoundException::new);
 
-        if (existingRetrospective.isPresent()) {
-            return Optional.of(retrospectiveRepository.save(retrospective));
+        String title = retrospectiveRequest.getTitle();
+        LocalDate date = retrospectiveRequest.getDate();
+        String sprintName = retrospectiveRequest.getSprintName();
+        RetrospectiveStatus status = retrospectiveRequest.getStatus();
+
+        if(title != null){
+            retrospective.setTitle(title);
         }
 
-        return Optional.empty();
+        if(date != null){
+            retrospective.setDate(date);
+        }
+
+        if(sprintName != null){
+            retrospective.setSprintName(sprintName);
+        }
+
+        if(status != null){
+            retrospective.setStatus(status);
+        }
+
+        retrospectiveRepository.save(retrospective);
+
+        return retrospective;
     }
 
     public boolean delete(Long id) {
