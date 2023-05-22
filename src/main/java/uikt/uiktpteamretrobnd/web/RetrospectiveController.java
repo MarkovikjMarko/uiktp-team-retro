@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import uikt.uiktpteamretrobnd.model.Retrospective;
 import uikt.uiktpteamretrobnd.service.RetrospectiveService;
+import uikt.uiktpteamretrobnd.web.requests.RetrospectiveRequest;
 import uikt.uiktpteamretrobnd.web.response.ApiResponse;
 import uikt.uiktpteamretrobnd.web.response.CustomResponse;
 
@@ -45,21 +46,17 @@ public class RetrospectiveController extends ResponseEntityExceptionHandler {
     }
 
     @PostMapping
-    public ApiResponse<Retrospective> create(@RequestBody @Valid Retrospective retrospective) {
-        Retrospective createdRetrospective = service.create(retrospective);
+    public ApiResponse<Retrospective> create(@RequestBody @Valid RetrospectiveRequest retrospectiveRequest) {
+        Retrospective retrospective = service.create(retrospectiveRequest);
 
-        return this.response.created(createdRetrospective);
+        return this.response.created(retrospective);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Retrospective> update(@PathVariable("id") Long id, @RequestBody Retrospective retrospective) {
-        Optional<Retrospective> updatedRetrospective = service.update(id, retrospective);
+    public ApiResponse<Retrospective> update(@PathVariable("id") Long id, @RequestBody RetrospectiveRequest retrospectiveRequest) {
+        Retrospective retrospective = service.update(id, retrospectiveRequest);
 
-        if (updatedRetrospective.isPresent()) {
-            return this.response.success(retrospective);
-        } else {
-            return this.response.notFound(retrospective);
-        }
+        return this.response.success(retrospective);
     }
 
     @DeleteMapping("/{id}")

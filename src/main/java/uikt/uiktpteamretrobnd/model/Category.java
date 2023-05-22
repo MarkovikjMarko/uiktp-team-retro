@@ -2,7 +2,7 @@ package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
 
-import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,21 +16,18 @@ public class Category {
 
     private String description;
 
-    private ImageIcon icon;
 
-    @OneToMany
-    private List<Item> items;
-
+    @OneToMany(mappedBy = "category")
+    private List<Item> items = new ArrayList<>();
 
     public Category() {
 
     }
 
-    public Category(Long id, String name, String description, ImageIcon icon) {
+    public Category(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.icon = icon;
     }
 
     public Long getId() {
@@ -55,13 +52,5 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ImageIcon getIcon() {
-        return icon;
-    }
-
-    public void setIcon(ImageIcon icon) {
-        this.icon = icon;
     }
 }

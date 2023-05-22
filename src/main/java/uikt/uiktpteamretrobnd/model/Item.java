@@ -1,8 +1,7 @@
 package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
+import org.springframework.context.annotation.Lazy;
 
 @Entity
 public class Item {
@@ -11,32 +10,39 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Body;
+    private String body;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @Lazy
+    private Category category;
 
     public Item() {
 
     }
 
-    public Item(Long id, String body) {
-        this.id = id;
-        Body = body;
+    public Item(String body, Category category) {
+        this.body = body;
+        this.category = category;
     }
-
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getBody() {
-        return Body;
+        return body;
     }
 
     public void setBody(String body) {
-        Body = body;
+        this.body = body;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
