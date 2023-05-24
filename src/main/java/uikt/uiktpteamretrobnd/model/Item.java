@@ -1,6 +1,8 @@
 package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.context.annotation.Lazy;
 
 @Entity
@@ -13,11 +15,13 @@ public class Item {
     private String body;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "category_id")
     @Lazy
     private Category category;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")
     @Lazy
     private User user;

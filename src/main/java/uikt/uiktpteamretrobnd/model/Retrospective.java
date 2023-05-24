@@ -1,6 +1,8 @@
 package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.context.annotation.Lazy;
 import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
 
@@ -29,10 +31,11 @@ public class Retrospective {
     @OneToMany
     private List<Team> teams;
 
-    @ManyToMany
+    @OneToMany
     private List<User> users;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "creator_id")
     @Lazy
     private User creator;
