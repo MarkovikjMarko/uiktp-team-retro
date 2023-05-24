@@ -28,8 +28,9 @@ public class TemplateService {
 
     public Template create(TemplateRequest templateRequest){
         String format = templateRequest.getFormat();
+        String name = templateRequest.getName();
 
-        Template template = new Template(format);
+        Template template = new Template(format, name);
         templateRepository.save(template);
 
         return template;
@@ -39,9 +40,14 @@ public class TemplateService {
         Template template = this.templateRepository.findById(id).orElseThrow(ModelNotFoundException::new);
 
         String format = templateRequest.getFormat();
+        String name = templateRequest.getName();
 
         if (format != null){
             template.setFormat(format);
+        }
+
+        if(name != null){
+            template.setName(name);
         }
 
         templateRepository.save(template);

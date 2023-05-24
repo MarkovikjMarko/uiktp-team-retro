@@ -8,8 +8,11 @@ public class TemplateRequest {
     @JsonProperty("format")
     private String format;
 
-    public TemplateRequest(String format) {
+    private String name;
+
+    public TemplateRequest(String format, String name) {
         this.format = format;
+        this.name = name;
     }
 
     public String getFormat() {
@@ -18,5 +21,13 @@ public class TemplateRequest {
 
     public void setFormat(String format) {
         this.format = format;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
