@@ -1,5 +1,6 @@
 package uikt.uiktpteamretrobnd.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +12,7 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("format")
     private String format;
 
 
@@ -18,12 +20,14 @@ public class Template {
 
     }
 
-
     public Template(Long id, String format) {
         this.id = id;
         this.format = format;
     }
 
+    public Template(String format) {
+        this.format = format;
+    }
 
     public Long getId() {
         return id;
