@@ -17,13 +17,19 @@ public class Item {
     @Lazy
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @Lazy
+    private User user;
+
     public Item() {
 
     }
 
-    public Item(String body, Category category) {
+    public Item(String body, Category category, User user) {
         this.body = body;
         this.category = category;
+        this.user = user;
     }
 
     public Long getId() {
@@ -44,5 +50,13 @@ public class Item {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

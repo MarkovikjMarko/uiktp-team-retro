@@ -4,9 +4,12 @@ public class ItemRequest {
     private String body;
     private Long categoryId;
 
-    public ItemRequest(String body, Long categoryId) {
+    private Long userId;
+
+    public ItemRequest(String body, Long categoryId, Long userId) {
         this.body = body;
         this.categoryId = categoryId;
+        this.userId = userId;
     }
 
     public String getBody() {
@@ -23,5 +26,13 @@ public class ItemRequest {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
