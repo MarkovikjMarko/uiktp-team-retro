@@ -1,6 +1,6 @@
 package uikt.uiktpteamretrobnd.web;
 
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ public class ImageController {
 
     @GetMapping("/images/{filename:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String filename) throws IOException {
-        Resource resource = new ClassPathResource("static/images/" + filename);
+        Resource resource = new FileSystemResource("src/main/images/" + filename);
 
         if (resource.exists()) {
             return ResponseEntity.ok()
