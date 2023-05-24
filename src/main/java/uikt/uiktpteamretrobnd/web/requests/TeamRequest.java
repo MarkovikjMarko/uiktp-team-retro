@@ -1,16 +1,12 @@
-package uikt.uiktpteamretrobnd.model;
+package uikt.uiktpteamretrobnd.web.requests;
 
-import jakarta.persistence.*;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import uikt.uiktpteamretrobnd.model.User;
 
 import java.util.List;
 
-@Entity
-public class Team {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class TeamRequest {
     private String name;
 
     @ManyToOne
@@ -19,24 +15,14 @@ public class Team {
     @OneToMany
     private List<User> users;
 
-    public Team() {
-
-    }
-
-    public Team(Long id, String name) {
-        this.id = id;
+    public TeamRequest(String name, User leader, List<User> users) {
         this.name = name;
+        this.leader = leader;
+        this.users = users;
     }
 
-    public Team(String name, User leader, List<User> users) {
-    }
+    public TeamRequest() {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
