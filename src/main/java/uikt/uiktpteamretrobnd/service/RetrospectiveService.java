@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
 import uikt.uiktpteamretrobnd.model.Retrospective;
+import uikt.uiktpteamretrobnd.model.User;
 import uikt.uiktpteamretrobnd.model.exceptions.ModelNotFoundException;
 import uikt.uiktpteamretrobnd.repository.RetrospectiveRepository;
+import uikt.uiktpteamretrobnd.repository.UserRepository;
 import uikt.uiktpteamretrobnd.web.requests.RetrospectiveRequest;
 
 import java.time.LocalDate;
@@ -16,9 +18,12 @@ import java.util.Optional;
 public class RetrospectiveService {
     private final RetrospectiveRepository retrospectiveRepository;
 
+    private final UserRepository userRepository;
+
     @Autowired
-    public RetrospectiveService(RetrospectiveRepository retrospectiveRepository) {
+    public RetrospectiveService(RetrospectiveRepository retrospectiveRepository, UserRepository userRepository) {
         this.retrospectiveRepository = retrospectiveRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Retrospective> findAll() {
@@ -35,7 +40,9 @@ public class RetrospectiveService {
         String sprintName = retrospectiveRequest.getSprintName();
         RetrospectiveStatus status = retrospectiveRequest.getStatus();
 
-        Retrospective retrospective = new Retrospective(title, date, sprintName, status);
+        User creator = this.userRepository.findById(retrospectiveRequest.getCreatorId()).orElseThrow(ModelNotFoundException::new);
+
+        Retrospective retrospective = new Retrospective(title, date, sprintName, status, creator);
 
         retrospectiveRepository.save(retrospective);
 
@@ -49,6 +56,7 @@ public class RetrospectiveService {
         LocalDate date = retrospectiveRequest.getDate();
         String sprintName = retrospectiveRequest.getSprintName();
         RetrospectiveStatus status = retrospectiveRequest.getStatus();
+        Long creatorId = retrospectiveRequest.getCreatorId();
 
         if(title != null){
             retrospective.setTitle(title);
@@ -64,6 +72,11 @@ public class RetrospectiveService {
 
         if(status != null){
             retrospective.setStatus(status);
+        }
+
+        if(creatorId != null){
+            User creator = this.userRepository.findById(retrospectiveRequest.getCreatorId()).orElseThrow(ModelNotFoundException::new);
+            retrospective.setCreator(creator);
         }
 
         retrospectiveRepository.save(retrospective);

@@ -44,14 +44,14 @@ public class ItemController extends ResponseEntityExceptionHandler {
     }
 
     @PostMapping
-    public ApiResponse<Item> create(@RequestBody ItemRequest itemRequest) {
+    public ApiResponse<Item> create(@ModelAttribute ItemRequest itemRequest) {
         Item item = service.create(itemRequest);
 
         return this.response.created(item);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Item> update(@PathVariable("id") Long id, @RequestBody ItemRequest itemRequest) {
+    public ApiResponse<Item> update(@PathVariable("id") Long id, @ModelAttribute ItemRequest itemRequest) {
         Item item = service.update(id, itemRequest);
 
         return this.response.success(item);

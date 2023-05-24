@@ -1,6 +1,5 @@
 package uikt.uiktpteamretrobnd.web;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -46,14 +45,14 @@ public class RetrospectiveController extends ResponseEntityExceptionHandler {
     }
 
     @PostMapping
-    public ApiResponse<Retrospective> create(@RequestBody @Valid RetrospectiveRequest retrospectiveRequest) {
+    public ApiResponse<Retrospective> create(@ModelAttribute RetrospectiveRequest retrospectiveRequest) {
         Retrospective retrospective = service.create(retrospectiveRequest);
 
         return this.response.created(retrospective);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Retrospective> update(@PathVariable("id") Long id, @RequestBody RetrospectiveRequest retrospectiveRequest) {
+    public ApiResponse<Retrospective> update(@PathVariable("id") Long id, @ModelAttribute RetrospectiveRequest retrospectiveRequest) {
         Retrospective retrospective = service.update(id, retrospectiveRequest);
 
         return this.response.success(retrospective);

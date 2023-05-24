@@ -13,11 +13,14 @@ public class RetrospectiveRequest {
 
     private RetrospectiveStatus status;
 
-    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status) {
+    private Long creatorId;
+
+    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status, Long creatorId) {
         this.title = title;
         this.date = date;
         this.sprintName = sprintName;
         this.status = status;
+        this.creatorId = creatorId;
     }
 
     public String getTitle() {
@@ -50,5 +53,13 @@ public class RetrospectiveRequest {
 
     public void setStatus(RetrospectiveStatus status) {
         this.status = status;
+    }
+
+    public Long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Long creatorId) {
+        this.creatorId = creatorId;
     }
 }

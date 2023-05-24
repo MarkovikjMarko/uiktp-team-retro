@@ -2,11 +2,8 @@ package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.List;
-
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -19,26 +16,16 @@ public class User {
 
     private String password;
 
-    //mozhe i tip Image
-    private String imageUrl;
-
-    @OneToMany
-    private List<Retrospective> retrospectives;
-
-
-    @OneToMany
-    private List<Item> items;
+    private String imageName;
 
     public User() {
     }
 
-
-    public User(Long id, String name, String email, String password, String imageUrl) {
-        this.id = id;
+    public User(String name, String email, String password, String imageName) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.imageUrl = imageUrl;
+        this.imageName = imageName;
     }
 
     public Long getId() {
@@ -73,12 +60,11 @@ public class User {
         this.password = password;
     }
 
-    public String getImage() {
-        return imageUrl;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImage(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
-
 }

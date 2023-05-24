@@ -1,6 +1,9 @@
 package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.context.annotation.Lazy;
 import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
 
 import java.time.LocalDate;
@@ -12,7 +15,6 @@ public class Retrospective {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 
     private String title;
 
@@ -29,17 +31,24 @@ public class Retrospective {
     @OneToMany
     private List<Team> teams;
 
-    @ManyToMany
+    @OneToMany
     private List<User> users;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "creator_id")
+    @Lazy
+    private User creator;
 
     public Retrospective() {
     }
 
-    public Retrospective(String title, LocalDate date, String sprintName, RetrospectiveStatus status) {
+    public Retrospective(String title, LocalDate date, String sprintName, RetrospectiveStatus status, User creator) {
         this.title = title;
         this.date = date;
         this.sprintName = sprintName;
         this.status = status == null ? RetrospectiveStatus.DEFAULT : status;
+        this.creator = creator;
     }
 
     public Long getId() {
@@ -76,5 +85,13 @@ public class Retrospective {
 
     public void setStatus(RetrospectiveStatus status) {
         this.status = status;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }
