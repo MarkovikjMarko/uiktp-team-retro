@@ -1,9 +1,9 @@
 package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 
 @Entity
 public class Category {
@@ -17,17 +17,22 @@ public class Category {
     private String description;
 
 
-    @OneToMany(mappedBy = "category")
-    private List<Item> items = new ArrayList<>();
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "retrospective_id")
+    @Lazy
+    private Retrospective retrospective;
+    //private List<Item> items = new ArrayList<>();
 
-    public Category() {
+    public Category(String name, String description, Retrospective retro) {
 
     }
 
-    public Category(Long id, String name, String description) {
+    public Category(Long id, String name, String description, Retrospective retrospective) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.retrospective = retrospective;
     }
 
     public Long getId() {
@@ -52,5 +57,13 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Retrospective getRetrospective() {
+        return retrospective;
+    }
+
+    public void setRetrospective(Retrospective retrospective) {
+        this.retrospective = retrospective;
     }
 }
