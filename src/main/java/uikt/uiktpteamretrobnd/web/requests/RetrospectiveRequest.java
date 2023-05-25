@@ -15,12 +15,15 @@ public class RetrospectiveRequest {
 
     private Long creatorId;
 
-    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status, Long creatorId) {
+    private Long templateId;
+
+    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status, Long creatorId, Long templateId) {
         this.title = title;
         this.date = date;
         this.sprintName = sprintName;
         this.status = status;
         this.creatorId = creatorId;
+        this.templateId = templateId;
     }
 
     public String getTitle() {
@@ -61,5 +64,13 @@ public class RetrospectiveRequest {
 
     public void setCreatorId(Long creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public Long getTemplateId() {
+        return templateId;
+    }
+
+    public void setTemplateId(Long templateId) {
+        this.templateId = templateId;
     }
 }

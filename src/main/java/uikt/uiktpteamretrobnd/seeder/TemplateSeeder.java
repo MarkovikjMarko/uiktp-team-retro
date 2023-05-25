@@ -19,7 +19,6 @@ public class TemplateSeeder {
         this.createAgileRetrospective();
         this.createAnchorsAndEngines();
         this.createDropAddKeepImprove();
-        this.createDropAddKeepImprove();
         this.createFourLs();
         this.createMadSadGlad();
         this.createStartStopContinue();

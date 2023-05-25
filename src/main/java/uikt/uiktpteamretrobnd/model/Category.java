@@ -60,10 +60,6 @@ public class Category {
         this.description = description;
     }
 
-    public Retrospective getRetrospective() {
-        return retrospective;
-    }
-
     public void setRetrospective(Retrospective retrospective) {
         this.retrospective = retrospective;
     }
