@@ -25,7 +25,7 @@ public class Retrospective {
     @Enumerated(EnumType.STRING)
     private RetrospectiveStatus status = RetrospectiveStatus.DEFAULT;
 
-    @OneToMany
+    @OneToMany(mappedBy = "retrospective", fetch = FetchType.LAZY)
     private List<Category> categories;
 
     @OneToMany
@@ -93,5 +93,13 @@ public class Retrospective {
 
     public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }
