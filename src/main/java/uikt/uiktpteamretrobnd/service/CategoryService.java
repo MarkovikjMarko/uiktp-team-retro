@@ -19,13 +19,13 @@ import java.util.Optional;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final RetrospectiveRepository retrospective;
+    private final RetrospectiveRepository retrospectiveRepository;
 
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, RetrospectiveRepository retrospective) {
+    public CategoryService(CategoryRepository categoryRepository, RetrospectiveRepository retrospectiveRepository) {
         this.categoryRepository = categoryRepository;
-        this.retrospective = retrospective;
+        this.retrospectiveRepository = retrospectiveRepository;
     }
 
 
@@ -42,12 +42,12 @@ public class CategoryService {
 
     public Category create(CategoryRequest categoryRequest)
     {
-        Retrospective retro = this.retrospective.findById(categoryRequest.getRetrospectiveId()).orElseThrow(ModelNotFoundException::new);
+        Retrospective retro = this.retrospectiveRepository.findById(categoryRequest.getRetrospectiveId()).orElseThrow(ModelNotFoundException::new);
         String name = categoryRequest.getName();
         String description = categoryRequest.getDescription();
         Category category = new Category(name,description,retro);
-        categoryRepository.save(category);
-        return category;
+
+        return categoryRepository.save(category);
     }
 
 
@@ -55,18 +55,23 @@ public class CategoryService {
         Category category = this.categoryRepository.findById(id).orElseThrow(ModelNotFoundException::new);
 
         String name = categoryRequest.getName();
-        String descripiton = categoryRequest.getDescription();
+        String description = categoryRequest.getDescription();
+        Long retrospectiveId = categoryRequest.getRetrospectiveId();
 
         if(name != null){
             category.setName(name);
         }
 
-        if(descripiton != null){
-            category.setDescription(descripiton);
+        if(description != null){
+            category.setDescription(description);
         }
 
-        categoryRepository.save(category);
-        return category;
+        if(retrospectiveId != null){
+            Retrospective retrospective = this.retrospectiveRepository.findById(retrospectiveId).orElseThrow(ModelNotFoundException::new);
+            category.setRetrospective(retrospective);
+        }
+
+       return categoryRepository.save(category);
     }
 
     public boolean delete(Long id)

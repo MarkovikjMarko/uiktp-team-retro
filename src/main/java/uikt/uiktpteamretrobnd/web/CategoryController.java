@@ -8,7 +8,6 @@ import uikt.uiktpteamretrobnd.model.Category;
 import uikt.uiktpteamretrobnd.model.Item;
 import uikt.uiktpteamretrobnd.service.CategoryService;
 import uikt.uiktpteamretrobnd.web.requests.CategoryRequest;
-import uikt.uiktpteamretrobnd.web.requests.ItemRequest;
 import uikt.uiktpteamretrobnd.web.response.ApiResponse;
 import uikt.uiktpteamretrobnd.web.response.CustomResponse;
 
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/ap/category")
+@RequestMapping("/api/categories")
 public class CategoryController extends ResponseEntityExceptionHandler {
     private final CategoryService service;
     private final CustomResponse response;
