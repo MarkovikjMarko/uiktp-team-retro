@@ -1,23 +1,13 @@
 package uikt.uiktpteamretrobnd.web.requests;
 
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import uikt.uiktpteamretrobnd.model.User;
-
-import java.util.List;
-
 public class TeamRequest {
     private String name;
 
-    @ManyToOne
-    private User leader;
+    private Long leaderId;
 
-    @OneToMany
-    private List<User> users;
-
-    public TeamRequest(String name, User leader) {
+    public TeamRequest(String name, Long leaderId) {
         this.name = name;
-        this.leader = leader;
+        this.leaderId = leaderId;
     }
 
     public TeamRequest() {
@@ -32,19 +22,11 @@ public class TeamRequest {
         this.name = name;
     }
 
-    public User getLeader() {
-        return leader;
+    public Long getLeaderId() {
+        return leaderId;
     }
 
-    public void setLeader(User leader) {
-        this.leader = leader;
-    }
-
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setLeaderId(Long leaderId) {
+        this.leaderId = leaderId;
     }
 }

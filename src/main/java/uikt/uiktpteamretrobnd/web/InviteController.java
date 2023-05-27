@@ -8,6 +8,7 @@ import uikt.uiktpteamretrobnd.web.requests.InviteRequest;
 import uikt.uiktpteamretrobnd.web.response.ApiResponse;
 import uikt.uiktpteamretrobnd.web.response.CustomResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +26,13 @@ public class InviteController {
     @GetMapping
     public ApiResponse<List<Invite>> index() {
         List<Invite> invites = inviteService.findAll();
+        List<InviteDTO> inviteDTOS = new ArrayList<>();
 
-        return this.customResponse.success(invites);
+        for(Invite invite: invites){
+            inviteDTOS.add(new InviteDTO(invite));
+        }
+
+        return this.customResponse.success(inviteDTOS);
     }
 
     @GetMapping("/{id}")
@@ -41,8 +47,14 @@ public class InviteController {
     }
 
     @PostMapping
-    public ApiResponse<Invite> create(@ModelAttribute InviteRequest inviteRequest) {
-        Invite invite = inviteService.create(inviteRequest);
+    public ApiResponse<Object> create(@ModelAttribute InviteRequest inviteRequest) {
+        if(inviteRequest.getTeamId() != null){
+            List<InviteDTO> inviteDTOS = this.inviteService.createTeamInvites(inviteRequest);
+
+            return this.customResponse.success(inviteDTOS);
+        }
+
+        Invite invite = inviteService.createSingleInvite(inviteRequest);
 
         return this.customResponse.created(new InviteDTO(invite));
     }

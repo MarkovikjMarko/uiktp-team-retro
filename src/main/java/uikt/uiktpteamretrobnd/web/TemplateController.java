@@ -11,6 +11,7 @@ import uikt.uiktpteamretrobnd.web.requests.TemplateRequest;
 import uikt.uiktpteamretrobnd.web.response.ApiResponse;
 import uikt.uiktpteamretrobnd.web.response.CustomResponse;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,14 +48,14 @@ public class TemplateController extends ResponseEntityExceptionHandler {
     }
 
     @PostMapping
-    public ApiResponse<Template> create(@ModelAttribute @Valid TemplateRequest templateRequest){
+    public ApiResponse<Template> create(@ModelAttribute @Valid TemplateRequest templateRequest) throws IOException {
         Template template = templateService.create(templateRequest);
 
         return this.response.created(template);
     }
 
     @PostMapping("/{id}")
-    public ApiResponse<Template> update(@PathVariable("id") Long id, @ModelAttribute TemplateRequest templateRequest){
+    public ApiResponse<Template> update(@PathVariable("id") Long id, @ModelAttribute TemplateRequest templateRequest) throws IOException {
         Template template = templateService.update(id, templateRequest);
 
         return this.response.success(template);

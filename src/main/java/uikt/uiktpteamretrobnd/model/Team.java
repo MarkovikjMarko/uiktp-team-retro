@@ -1,6 +1,8 @@
 package uikt.uiktpteamretrobnd.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Team {
     @ManyToOne
     private User leader;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "team")
     private List<User> users;
 
@@ -23,9 +26,10 @@ public class Team {
 
     }
 
-    public Team(Long id, String name) {
+    public Team(Long id, String name, User leader) {
         this.id = id;
         this.name = name;
+        this.leader = leader;
     }
 
     public Team(String name, User leader) {

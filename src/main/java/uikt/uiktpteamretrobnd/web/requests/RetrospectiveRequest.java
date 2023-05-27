@@ -17,13 +17,16 @@ public class RetrospectiveRequest {
 
     private Long templateId;
 
-    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status, Long creatorId, Long templateId) {
+    private Long teamId;
+
+    public RetrospectiveRequest(String title, LocalDate date, String sprintName, RetrospectiveStatus status, Long creatorId, Long templateId, Long teamId) {
         this.title = title;
         this.date = date;
         this.sprintName = sprintName;
         this.status = status;
         this.creatorId = creatorId;
         this.templateId = templateId;
+        this.teamId = teamId;
     }
 
     public String getTitle() {
@@ -72,5 +75,13 @@ public class RetrospectiveRequest {
 
     public void setTemplateId(Long templateId) {
         this.templateId = templateId;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }

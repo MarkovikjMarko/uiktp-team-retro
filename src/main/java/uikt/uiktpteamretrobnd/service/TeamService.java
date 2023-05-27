@@ -5,6 +5,7 @@ import uikt.uiktpteamretrobnd.model.Team;
 import uikt.uiktpteamretrobnd.model.User;
 import uikt.uiktpteamretrobnd.model.exceptions.ModelNotFoundException;
 import uikt.uiktpteamretrobnd.repository.TeamRepository;
+import uikt.uiktpteamretrobnd.repository.UserRepository;
 import uikt.uiktpteamretrobnd.web.requests.TeamRequest;
 
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @Service
 public class TeamService {
     private final TeamRepository teamRepository;
+    private final UserRepository userRepository;
 
-    public TeamService(TeamRepository teamRepository) {
+    public TeamService(TeamRepository teamRepository, UserRepository userRepository) {
         this.teamRepository = teamRepository;
+        this.userRepository = userRepository;
     }
     public List<Team> findAll() {
         return teamRepository.findAll();
@@ -27,7 +30,10 @@ public class TeamService {
 
     public Team create(TeamRequest teamRequest) {
         String name = teamRequest.getName();
-        User leader = teamRequest.getLeader();
+        Long leaderId = teamRequest.getLeaderId();
+
+        User leader = this.userRepository.findById(leaderId).get();
+
         Team team = new Team(name, leader);
 
         teamRepository.save(team);
@@ -38,13 +44,14 @@ public class TeamService {
     public Team update(Long id, TeamRequest teamRequest) {
         Team team = this.teamRepository.findById(id).orElseThrow(ModelNotFoundException::new);
         String name = teamRequest.getName();
-        User leader = teamRequest.getLeader();
+        Long leaderId = teamRequest.getLeaderId();
 
         if(name != null){
             team.setName(name);
         }
 
-        if(leader != null){
+        if(leaderId != null){
+            User leader = this.userRepository.findById(leaderId).get();
             team.setLeader(leader);
         }
 

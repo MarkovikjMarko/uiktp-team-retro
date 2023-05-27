@@ -9,8 +9,10 @@ import uikt.uiktpteamretrobnd.repository.InviteRepository;
 import uikt.uiktpteamretrobnd.repository.RetrospectiveRepository;
 import uikt.uiktpteamretrobnd.repository.TeamRepository;
 import uikt.uiktpteamretrobnd.repository.UserRepository;
+import uikt.uiktpteamretrobnd.web.dto.InviteDTO;
 import uikt.uiktpteamretrobnd.web.requests.InviteRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,27 +38,30 @@ public class InviteService {
         return inviteRepository.findById(id);
     }
 
-    public Invite create(InviteRequest inviteRequest) {
-        Invite invite = new Invite();
+    public Invite createSingleInvite(InviteRequest inviteRequest) {
         Retrospective retrospective = this.retrospectiveRepository.findById(inviteRequest.getRetrospectiveId()).get();
-
-        if (inviteRequest.getTeamId() != null) {
-            Team team = this.teamRepository.findById(inviteRequest.getUserId()).get();
-
-            Invite invite1 = null;
-
-            for (User user : team.getUsers()) {
-                Invite invite2 = new Invite(retrospective, user);
-                invite1 = this.inviteRepository.save(invite2);
-            }
-
-            return invite1;
-        }
-
         User user = this.userRepository.findById(inviteRequest.getUserId()).get();
-        invite.setUser(user);
+
+        Invite invite = new Invite(retrospective, user);
 
         return this.inviteRepository.save(invite);
+    }
+
+    public List<InviteDTO> createTeamInvites(InviteRequest inviteRequest){
+        Retrospective retrospective = this.retrospectiveRepository.findById(inviteRequest.getRetrospectiveId()).get();
+
+        Team team = this.teamRepository.findById(inviteRequest.getUserId()).get();
+
+        List<InviteDTO> inviteDTOS = new ArrayList<>();
+
+        for (User user : team.getUsers()) {
+            Invite invite = new Invite(retrospective, user);
+            this.inviteRepository.save(invite);
+
+            inviteDTOS.add(new InviteDTO(invite));
+        }
+
+        return inviteDTOS;
     }
 
     public boolean delete(Long id) {
