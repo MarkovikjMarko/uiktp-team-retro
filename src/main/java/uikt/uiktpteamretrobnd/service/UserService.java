@@ -3,8 +3,10 @@ package uikt.uiktpteamretrobnd.service;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import uikt.uiktpteamretrobnd.model.Team;
 import uikt.uiktpteamretrobnd.model.User;
 import uikt.uiktpteamretrobnd.model.exceptions.ModelNotFoundException;
+import uikt.uiktpteamretrobnd.repository.TeamRepository;
 import uikt.uiktpteamretrobnd.repository.UserRepository;
 import uikt.uiktpteamretrobnd.web.requests.UserRequest;
 
@@ -20,9 +22,11 @@ import java.util.UUID;
 @Service
 public class UserService {
     private UserRepository userRepository;
+    private TeamRepository teamRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, TeamRepository teamRepository) {
         this.userRepository = userRepository;
+        this.teamRepository = teamRepository;
     }
 
     public List<User> findAll() {
@@ -38,10 +42,11 @@ public class UserService {
         String password = userRequest.getPassword();
         String email = userRequest.getEmail();
         MultipartFile image = userRequest.getImage();
+        Team team = teamRepository.findById(userRequest.getTeamId()).get();
 
         String imageUrl = this.uploadImage(image);
 
-        User user = new User(name, email, password, imageUrl);
+        User user = new User(name, email, password, imageUrl, team);
 
         return this.userRepository.save(user);
     }
@@ -74,22 +79,28 @@ public class UserService {
         String password = userRequest.getPassword();
         String email = userRequest.getEmail();
         MultipartFile image = userRequest.getImage();
+        Long teamId = userRequest.getTeamId();
 
-        if(name != null){
+        if (name != null) {
             user.setName(name);
         }
 
-        if(password != null){
+        if (password != null) {
             user.setPassword(password);
         }
 
-        if(email != null){
+        if (email != null) {
             user.setEmail(email);
         }
 
-        if(image != null){
+        if (image != null) {
             String imageName = this.uploadImage(image);
             user.setImageName(imageName);
+        }
+
+        if(teamId != null){
+            Team team = teamRepository.findById(teamId).get();
+            user.setTeam(team);
         }
 
         return this.userRepository.save(user);

@@ -11,11 +11,14 @@ public class UserRequest {
 
     private MultipartFile image;
 
-    public UserRequest(String name, String email, String password, MultipartFile image) {
+    private Long teamId;
+
+    public UserRequest(String name, String email, String password, MultipartFile image, Long teamId) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.image = image;
+        this.teamId = teamId;
     }
 
     public String getName() {
@@ -48,5 +51,13 @@ public class UserRequest {
 
     public void setImage(MultipartFile image) {
         this.image = image;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 }

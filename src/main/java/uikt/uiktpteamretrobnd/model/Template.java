@@ -16,13 +16,16 @@ public class Template {
 
     private String name;
 
+    private String imageName;
+
     public Template() {
 
     }
 
-    public Template(String format, String name) {
+    public Template(String format, String name, String imageName) {
         this.format = format;
         this.name = name;
+        this.imageName = imageName;
     }
 
     public Template(String format) {
@@ -51,5 +54,13 @@ public class Template {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

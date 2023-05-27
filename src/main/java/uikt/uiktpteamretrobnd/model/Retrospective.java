@@ -28,11 +28,8 @@ public class Retrospective {
     @OneToMany(mappedBy = "retrospective", fetch = FetchType.LAZY)
     private List<Category> categories;
 
-    @OneToMany
-    private List<Team> teams;
-
-    @OneToMany
-    private List<User> users;
+    @OneToMany(mappedBy = "retrospective")
+    private List<Invite> invites;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -40,15 +37,21 @@ public class Retrospective {
     @Lazy
     private User creator;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
     public Retrospective() {
     }
 
-    public Retrospective(String title, LocalDate date, String sprintName, RetrospectiveStatus status, User creator) {
+    public Retrospective(String title, LocalDate date, String sprintName, RetrospectiveStatus status, User creator, Team team) {
         this.title = title;
         this.date = date;
         this.sprintName = sprintName;
         this.status = status == null ? RetrospectiveStatus.DEFAULT : status;
         this.creator = creator;
+        this.team = team;
     }
 
     public Long getId() {
@@ -101,5 +104,13 @@ public class Retrospective {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

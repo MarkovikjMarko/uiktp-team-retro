@@ -2,10 +2,8 @@ package uikt.uiktpteamretrobnd.web;
 
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-import uikt.uiktpteamretrobnd.model.Retrospective;
 import uikt.uiktpteamretrobnd.model.Team;
 import uikt.uiktpteamretrobnd.service.TeamService;
-import uikt.uiktpteamretrobnd.web.requests.RetrospectiveRequest;
 import uikt.uiktpteamretrobnd.web.requests.TeamRequest;
 import uikt.uiktpteamretrobnd.web.response.ApiResponse;
 import uikt.uiktpteamretrobnd.web.response.CustomResponse;
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/teams")
+@RequestMapping("/api/teams")
 public class TeamController {
     private final TeamService service;
     private final CustomResponse response;

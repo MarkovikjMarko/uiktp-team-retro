@@ -5,15 +5,9 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uikt.uiktpteamretrobnd.enums.RetrospectiveStatus;
-import uikt.uiktpteamretrobnd.model.Category;
-import uikt.uiktpteamretrobnd.model.Retrospective;
-import uikt.uiktpteamretrobnd.model.Template;
-import uikt.uiktpteamretrobnd.model.User;
+import uikt.uiktpteamretrobnd.model.*;
 import uikt.uiktpteamretrobnd.model.exceptions.ModelNotFoundException;
-import uikt.uiktpteamretrobnd.repository.CategoryRepository;
-import uikt.uiktpteamretrobnd.repository.RetrospectiveRepository;
-import uikt.uiktpteamretrobnd.repository.TemplateRepository;
-import uikt.uiktpteamretrobnd.repository.UserRepository;
+import uikt.uiktpteamretrobnd.repository.*;
 import uikt.uiktpteamretrobnd.web.requests.RetrospectiveRequest;
 
 import java.time.LocalDate;
@@ -27,13 +21,15 @@ public class RetrospectiveService {
     private final UserRepository userRepository;
     private final TemplateRepository templateRepository;
     private final CategoryRepository categoryRepository;
+    private final TeamRepository teamRepository;
 
     @Autowired
-    public RetrospectiveService(RetrospectiveRepository retrospectiveRepository, UserRepository userRepository, TemplateRepository templateRepository, CategoryRepository categoryRepository) {
+    public RetrospectiveService(RetrospectiveRepository retrospectiveRepository, UserRepository userRepository, TemplateRepository templateRepository, CategoryRepository categoryRepository, TeamRepository teamRepository) {
         this.retrospectiveRepository = retrospectiveRepository;
         this.userRepository = userRepository;
         this.templateRepository = templateRepository;
         this.categoryRepository = categoryRepository;
+        this.teamRepository = teamRepository;
     }
 
     public List<Retrospective> findAll() {
@@ -50,10 +46,13 @@ public class RetrospectiveService {
         String sprintName = retrospectiveRequest.getSprintName();
         RetrospectiveStatus status = retrospectiveRequest.getStatus();
         Long templateId = retrospectiveRequest.getTemplateId();
+        Long teamId = retrospectiveRequest.getTeamId();
 
         User creator = this.userRepository.findById(retrospectiveRequest.getCreatorId()).orElseThrow(ModelNotFoundException::new);
 
-        Retrospective retrospective = new Retrospective(title, date, sprintName, status, creator);
+        Team team = this.teamRepository.findById(teamId).get();
+
+        Retrospective retrospective = new Retrospective(title, date, sprintName, status, creator, team);
 
         retrospectiveRepository.save(retrospective);
 
@@ -90,6 +89,7 @@ public class RetrospectiveService {
         String sprintName = retrospectiveRequest.getSprintName();
         RetrospectiveStatus status = retrospectiveRequest.getStatus();
         Long creatorId = retrospectiveRequest.getCreatorId();
+        Long teamId = retrospectiveRequest.getTeamId();
 
         if(title != null){
             retrospective.setTitle(title);
@@ -110,6 +110,11 @@ public class RetrospectiveService {
         if(creatorId != null){
             User creator = this.userRepository.findById(retrospectiveRequest.getCreatorId()).orElseThrow(ModelNotFoundException::new);
             retrospective.setCreator(creator);
+        }
+
+        if(teamId != null){
+            Team team = this.teamRepository.findById(teamId).get();
+            retrospective.setTeam(team);
         }
 
         retrospectiveRepository.save(retrospective);

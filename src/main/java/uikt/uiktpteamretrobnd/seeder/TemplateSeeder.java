@@ -46,7 +46,7 @@ public class TemplateSeeder {
                 "  ]\n" +
                 "}";
 
-        Template template = new Template(format, name);
+        Template template = new Template(format, name, "AgileRetrospectiveImage.png");
         this.templateRepository.save(template);
     }
 
@@ -64,7 +64,7 @@ public class TemplateSeeder {
                 "  ]\n" +
                 "}";
 
-        Template template = new Template(format, name);
+        Template template = new Template(format, name, "AnchorsAndEngines.png");
         this.templateRepository.save(template);
     }
 
@@ -90,7 +90,7 @@ public class TemplateSeeder {
                 "  ]\n" +
                 "}";
 
-        Template template = new Template(format, name);
+        Template template = new Template(format, name, "Daki.png");
         this.templateRepository.save(template);
     }
 
@@ -116,7 +116,7 @@ public class TemplateSeeder {
                 "  ]\n" +
                 "}";
 
-        Template template = new Template(format, name);
+        Template template = new Template(format, name, "FourLs.png");
         this.templateRepository.save(template);
     }
 
@@ -138,7 +138,7 @@ public class TemplateSeeder {
                 "  ]\n" +
                 "}";
 
-        Template template = new Template(format, name);
+        Template template = new Template(format, name, "MadSadGlad.png");
         this.templateRepository.save(template);
     }
 
@@ -160,7 +160,7 @@ public class TemplateSeeder {
                 "  ]\n" +
                 "}";
 
-        Template template = new Template(format, name);
+        Template template = new Template(format, name, "StartStopContinue.png");
         this.templateRepository.save(template);
     }
 }
