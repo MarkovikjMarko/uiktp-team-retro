@@ -16,7 +16,7 @@ public class Team {
     @ManyToOne
     private User leader;
 
-    @OneToMany
+    @OneToMany(mappedBy = "team")
     private List<User> users;
 
     public Team() {
@@ -26,5 +26,9 @@ public class Team {
     public Team(Long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 }

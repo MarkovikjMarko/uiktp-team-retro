@@ -31,8 +31,8 @@ public class Retrospective {
     @OneToMany
     private List<Team> teams;
 
-    @OneToMany
-    private List<User> users;
+    @OneToMany(mappedBy = "retrospective")
+    private List<Invite> invites;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -102,4 +102,6 @@ public class Retrospective {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
+
+
 }
