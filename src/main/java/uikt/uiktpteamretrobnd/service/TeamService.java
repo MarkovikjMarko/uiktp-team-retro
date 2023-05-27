@@ -28,9 +28,7 @@ public class TeamService {
     public Team create(TeamRequest teamRequest) {
         String name = teamRequest.getName();
         User leader = teamRequest.getLeader();
-        List<User> users = teamRequest.getUsers();
-
-        Team team = new Team(name, leader,users);
+        Team team = new Team(name, leader);
 
         teamRepository.save(team);
 
@@ -39,10 +37,8 @@ public class TeamService {
 
     public Team update(Long id, TeamRequest teamRequest) {
         Team team = this.teamRepository.findById(id).orElseThrow(ModelNotFoundException::new);
-
         String name = teamRequest.getName();
         User leader = teamRequest.getLeader();
-        List<User> users = teamRequest.getUsers();
 
         if(name != null){
             team.setName(name);
@@ -50,10 +46,6 @@ public class TeamService {
 
         if(leader != null){
             team.setLeader(leader);
-        }
-        if(users != null)
-        {
-            team.setUsers(users);
         }
 
         teamRepository.save(team);

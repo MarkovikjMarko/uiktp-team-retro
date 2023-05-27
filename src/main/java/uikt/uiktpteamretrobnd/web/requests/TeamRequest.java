@@ -15,10 +15,9 @@ public class TeamRequest {
     @OneToMany
     private List<User> users;
 
-    public TeamRequest(String name, User leader, List<User> users) {
+    public TeamRequest(String name, User leader) {
         this.name = name;
         this.leader = leader;
-        this.users = users;
     }
 
     public TeamRequest() {

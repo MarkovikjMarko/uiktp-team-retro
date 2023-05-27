@@ -28,7 +28,7 @@ public class Team {
         this.name = name;
     }
 
-    public Team(String name, User leader, List<User> users) {
+    public Team(String name, User leader) {
     }
 
     public Long getId() {
