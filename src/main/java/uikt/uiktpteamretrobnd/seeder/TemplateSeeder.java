@@ -1,6 +1,5 @@
 package uikt.uiktpteamretrobnd.seeder;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 import uikt.uiktpteamretrobnd.model.Template;
 import uikt.uiktpteamretrobnd.repository.TemplateRepository;
@@ -9,12 +8,10 @@ import uikt.uiktpteamretrobnd.repository.TemplateRepository;
 public class TemplateSeeder {
     private final TemplateRepository templateRepository;
 
-
     public TemplateSeeder(TemplateRepository templateRepository) {
         this.templateRepository = templateRepository;
     }
 
-    @PostConstruct
     public void seed(){
         this.createAgileRetrospective();
         this.createAnchorsAndEngines();

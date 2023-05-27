@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.List;
 
 @Entity
+@Table(name = "teams")
 public class Team {
 
     @Id
@@ -19,20 +20,16 @@ public class Team {
     private User leader;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", fetch = FetchType.EAGER)
     private List<User> users;
 
     public Team() {
 
     }
 
-    public Team(Long id, String name, User leader) {
-        this.id = id;
+    public Team(String name, User leader) {
         this.name = name;
         this.leader = leader;
-    }
-
-    public Team(String name, User leader) {
     }
 
     public Long getId() {
