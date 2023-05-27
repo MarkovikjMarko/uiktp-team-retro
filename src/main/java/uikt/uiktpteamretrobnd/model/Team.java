@@ -62,5 +62,4 @@ public class Team {
     public void setUsers(List<User> users) {
         this.users = users;
     }
->>>>>>> 91075f517eb86194cea576a8fbc0fa70b06d44a6
 }
