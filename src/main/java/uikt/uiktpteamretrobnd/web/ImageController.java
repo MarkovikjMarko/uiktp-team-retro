@@ -17,12 +17,14 @@ public class ImageController {
 
     @GetMapping("/images/{fileName:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable String fileName) throws IOException {
-        String path = "src/main/";
+        String path = "src/main/images/";
 
-        if(this.checkIfItsTemplateImage(fileName)){
+        if (this.checkIfItsTemplateImage(fileName)) {
             path += "templateImages/";
-        }else{
-            path += "images/";
+        } else if (this.checkIfItsCategoryImage(fileName)) {
+            path += "categoryImages/";
+        } else {
+            path += "uploadedImages/";
         }
 
         Resource resource = new FileSystemResource(path + fileName);
@@ -37,7 +39,7 @@ public class ImageController {
         }
     }
 
-    public Boolean checkIfItsTemplateImage(String fileName){
+    public Boolean checkIfItsTemplateImage(String fileName) {
         List<String> templateImagesNames = Arrays.asList(
                 "AgileRetrospectiveImage.png",
                 "AnchorsAndEngines.png",
@@ -49,5 +51,32 @@ public class ImageController {
         );
 
         return templateImagesNames.contains(fileName);
+    }
+
+    public Boolean checkIfItsCategoryImage(String fileName) {
+        List<String> categoryImagesNames = Arrays.asList(
+                "Add.png",
+                "Anchors.png",
+                "Continue.png",
+                "Drop.png",
+                "Engines.png",
+                "Glad.png",
+                "Improve.png",
+                "Keep.png",
+                "Lacked.png",
+                "Learned.png",
+                "LessWell.png",
+                "Liked.png",
+                "LongedFor.png",
+                "Mad.png",
+                "Puzzle.png",
+                "Sad.png",
+                "Start.png",
+                "Stop.png",
+                "TryNext.png",
+                "WentWell.png"
+        );
+
+        return categoryImagesNames.contains(fileName);
     }
 }

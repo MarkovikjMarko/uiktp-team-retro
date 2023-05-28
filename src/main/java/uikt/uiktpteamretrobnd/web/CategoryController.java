@@ -11,6 +11,7 @@ import uikt.uiktpteamretrobnd.web.requests.CategoryRequest;
 import uikt.uiktpteamretrobnd.web.response.ApiResponse;
 import uikt.uiktpteamretrobnd.web.response.CustomResponse;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,14 +48,13 @@ public class CategoryController extends ResponseEntityExceptionHandler {
     }
 
     @PostMapping
-    public ApiResponse<Category> create(@ModelAttribute CategoryRequest categoryRequest)
-    {
+    public ApiResponse<Category> create(@ModelAttribute CategoryRequest categoryRequest) throws IOException {
         Category category = service.create(categoryRequest);
         return this.response.created(category);
     }
 
     @PutMapping("/{id}")
-    public ApiResponse<Item> update(@PathVariable("id") Long id, @ModelAttribute CategoryRequest categoryRequest) {
+    public ApiResponse<Item> update(@PathVariable("id") Long id, @ModelAttribute CategoryRequest categoryRequest) throws IOException {
         Category category = service.update(id, categoryRequest);
 
         return this.response.success(category);
