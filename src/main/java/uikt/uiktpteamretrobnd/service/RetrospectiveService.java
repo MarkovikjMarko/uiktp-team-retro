@@ -62,7 +62,7 @@ public class RetrospectiveService {
 
         return retrospective;
     }
-    private Retrospective createRetrospectiveFromTemplate(Retrospective retrospective, Long templateId){
+    public Retrospective createRetrospectiveFromTemplate(Retrospective retrospective, Long templateId){
         Template template = this.templateRepository.findById(templateId).orElseThrow(ModelNotFoundException::new);
 
         JSONObject json = new JSONObject(template.getFormat());

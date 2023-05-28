@@ -44,7 +44,8 @@ public class ImageController {
                 "Daki.png",
                 "FourLs.png",
                 "MadSadGlad.png",
-                "StartStopContinue.png"
+                "StartStopContinue.png",
+                "Unknown_person.jpg" // this is a user image
         );
 
         return templateImagesNames.contains(fileName);
