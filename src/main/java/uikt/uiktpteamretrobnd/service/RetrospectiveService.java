@@ -73,8 +73,9 @@ public class RetrospectiveService {
             JSONArray categoryArray = json.getJSONArray("Category" + i);
             String name = categoryArray.getString(0);
             String description = categoryArray.getString(1);
+            String imageName = categoryArray.getString(2);
 
-            Category category = new Category(name, description, retrospective);
+            Category category = new Category(name, description, retrospective, imageName);
             this.categoryRepository.save(category);
         }
 

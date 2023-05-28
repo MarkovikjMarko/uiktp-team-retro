@@ -18,6 +18,8 @@ public class Category {
 
     private String description;
 
+    private String imageName;
+
     @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToMany(mappedBy = "category")
     private List<Item> items = new ArrayList<>();
@@ -30,10 +32,11 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, String description, Retrospective retrospective) {
+    public Category(String name, String description, Retrospective retrospective, String imageName) {
         this.name = name;
         this.description = description;
         this.retrospective = retrospective;
+        this.imageName = imageName;
     }
 
     public Long getId() {
@@ -62,5 +65,13 @@ public class Category {
 
     public void setRetrospective(Retrospective retrospective) {
         this.retrospective = retrospective;
+    }
+
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

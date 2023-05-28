@@ -58,7 +58,7 @@ public class UserService {
 
         String imageName = UUID.randomUUID().toString() + StringUtils.cleanPath(image.getOriginalFilename());
 
-        String uploadDir = "src/main/images/";
+        String uploadDir = "src/main/images/uploadedImages/";
 
         // Create the directory if it doesn't exist
         File directory = new File(uploadDir);

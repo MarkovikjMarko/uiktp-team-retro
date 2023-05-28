@@ -1,5 +1,7 @@
 package uikt.uiktpteamretrobnd.web.requests;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CategoryRequest {
 
     private String name;
@@ -7,10 +9,13 @@ public class CategoryRequest {
 
     private Long retrospectiveId;
 
-    public CategoryRequest(String name, String description, Long retrospectiveId) {
+    private MultipartFile image;
+
+    public CategoryRequest(String name, String description, Long retrospectiveId, MultipartFile image) {
         this.name = name;
         this.description = description;
         this.retrospectiveId = retrospectiveId;
+        this.image = image;
     }
 
     public String getName() {
@@ -35,5 +40,13 @@ public class CategoryRequest {
 
     public void setRetrospectiveId(Long retrospectiveId) {
         this.retrospectiveId = retrospectiveId;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 }

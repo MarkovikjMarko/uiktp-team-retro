@@ -27,19 +27,23 @@ public class TemplateSeeder {
                 "  \"CategoriesCount\": 4,\n" +
                 "  \"Category1\": [\n" +
                 "    \"What went well?\",\n" +
-                "    \"Explain what went well\"\n" +
+                "    \"Explain what went well\",\n" +
+                "    \"WentWell.png\"\n" +
                 "  ],\n" +
                 "    \"Category2\": [\n" +
                 "    \"What went less well?\",\n" +
-                "    \"Explain what went less well\"\n" +
+                "    \"Explain what went less well\",\n" +
+                "    \"LessWell.png\"\n" +
                 "  ],\n" +
                 "    \"Category3\": [\n" +
                 "    \"What do we want to try next?\",\n" +
-                "    \"What do we want to try next\"\n" +
+                "    \"What do we want to try next\",\n" +
+                "    \"TryNext.png\"\n" +
                 "  ],\n" +
                 "    \"Category4\": [\n" +
                 "    \"What puzzles us?\",\n" +
-                "    \"What puzzles us\"\n" +
+                "    \"What puzzles us\",\n" +
+                "    \"Puzzle.png\"\n" +
                 "  ]\n" +
                 "}";
 
@@ -53,11 +57,13 @@ public class TemplateSeeder {
                 "  \"CategoriesCount\": 2,\n" +
                 "  \"Category1\": [\n" +
                 "    \"Anchors\",\n" +
-                "    \"What were our anchors\"\n" +
+                "    \"What were our anchors\",\n" +
+                "    \"Anchors.png\"\n" +
                 "  ],\n" +
                 "    \"Category2\": [\n" +
                 "    \"Engines\",\n" +
-                "    \"What were our engines\"\n" +
+                "    \"What were our engines\",\n" +
+                "    \"Engines.png\"\n" +
                 "  ]\n" +
                 "}";
 
@@ -71,19 +77,23 @@ public class TemplateSeeder {
                 "  \"CategoriesCount\": 4,\n" +
                 "  \"Category1\": [\n" +
                 "    \"Drop\",\n" +
-                "    \"What should we drop\"\n" +
+                "    \"What should we drop\",\n" +
+                "    \"Drop.png\"\n" +
                 "  ],\n" +
                 "    \"Category2\": [\n" +
                 "    \"Add\",\n" +
-                "    \"What should we add\"\n" +
+                "    \"What should we add\",\n" +
+                "    \"Add.png\"\n" +
                 "  ],\n" +
                 "    \"Category3\": [\n" +
                 "    \"Keep\",\n" +
-                "    \"What should we keep\"\n" +
+                "    \"What should we keep\",\n" +
+                "    \"Keep.png\"\n" +
                 "  ],\n" +
                 "    \"Category4\": [\n" +
                 "    \"Improve\",\n" +
-                "    \"What should we improve\"\n" +
+                "    \"What should we improve\",\n" +
+                "    \"Improve.png\"\n" +
                 "  ]\n" +
                 "}";
 
@@ -97,19 +107,23 @@ public class TemplateSeeder {
                 "  \"CategoriesCount\": 4,\n" +
                 "  \"Category1\": [\n" +
                 "    \"Liked\",\n" +
-                "    \"What did we liked\"\n" +
+                "    \"What did we liked\",\n" +
+                "    \"Liked.png\"\n" +
                 "  ],\n" +
                 "    \"Category2\": [\n" +
                 "    \"Learned\",\n" +
-                "    \"What did we learned\"\n" +
+                "    \"What did we learned\",\n" +
+                "    \"Learned.png\"\n" +
                 "  ],\n" +
                 "    \"Category3\": [\n" +
                 "    \"Lacked\",\n" +
-                "    \"What did we lacked\"\n" +
+                "    \"What did we lacked\",\n" +
+                "    \"Lacked.png\"\n" +
                 "  ],\n" +
                 "    \"Category4\": [\n" +
                 "    \"Longed For\",\n" +
-                "    \"What did we longed For\"\n" +
+                "    \"What did we longed For\",\n" +
+                "    \"LongedFor.png\"\n" +
                 "  ]\n" +
                 "}";
 
@@ -123,15 +137,18 @@ public class TemplateSeeder {
                 "  \"CategoriesCount\": 3,\n" +
                 "  \"Category1\": [\n" +
                 "    \"Mad\",\n" +
-                "    \"What are we mad about\"\n" +
+                "    \"What are we mad about\",\n" +
+                "    \"Mad.png\"\n" +
                 "  ],\n" +
                 "    \"Category2\": [\n" +
                 "    \"Sad\",\n" +
-                "    \"What are we sad about\"\n" +
+                "    \"What are we sad about\",\n" +
+                "    \"Sad.png\"\n" +
                 "  ],\n" +
                 "    \"Category3\": [\n" +
                 "    \"Glad\",\n" +
-                "    \"What are we glad about\"\n" +
+                "    \"What are we glad about\",\n" +
+                "    \"Glad.png\"\n" +
                 "  ]\n" +
                 "}";
 
@@ -145,15 +162,18 @@ public class TemplateSeeder {
                 "  \"CategoriesCount\": 3,\n" +
                 "  \"Category1\": [\n" +
                 "    \"Start\",\n" +
-                "    \"What should we start\"\n" +
+                "    \"What should we start\",\n" +
+                "    \"Start.png\"\n" +
                 "  ],\n" +
                 "    \"Category2\": [\n" +
                 "    \"Stop\",\n" +
-                "    \"What should we stop\"\n" +
+                "    \"What should we stop\",\n" +
+                "    \"Stop.png\"\n" +
                 "  ],\n" +
                 "    \"Category3\": [\n" +
                 "    \"Continue\",\n" +
-                "    \"What should we continue\"\n" +
+                "    \"What should we continue\",\n" +
+                "    \"Continue.png\"\n" +
                 "  ]\n" +
                 "}";
 
